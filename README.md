@@ -3,8 +3,20 @@ Simple `.ttf` font viewer I wrote out of pure curiosity.
 
 TTF file parsing is implemented manually and based on [Apple TrueType Reference Manual](https://developer.apple.com/fonts/TrueType-Reference-Manual). 
 Rendering, input processing and IO is done using [SDL2](https://github.com/libsdl-org/SDL/tree/SDL2).
+
 ## Building
-This is a regular `CMake` project.
+Don't forget to download `SDL` submodule before (one-time action):
+```bash
+git submodule update --init --recursive
+```
+This is a regular `CMake` project so just create a `build` directory for build files:
+```bash
+mkdir build
+cd build
+cmake ..
+cmake --build .
+```
+
 ## Usage
 1) Drag&Drop `.ttf` file into window
 2) Use:

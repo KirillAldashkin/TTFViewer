@@ -2,7 +2,7 @@
 #define TABLES_HMTX_H
 
 #include <SDL.h>
-#include "..\ttf.h"
+#include "ttf/ttf.h"
 
 typedef struct {
 	struct {

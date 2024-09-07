@@ -2,7 +2,7 @@
 #define TABLES_GLYF_H
 
 #include <SDL.h>
-#include "..\ttf.h"
+#include "ttf/ttf.h"
 #include <stdint.h>
 
 // simple glyph point flags

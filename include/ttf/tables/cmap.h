@@ -2,7 +2,7 @@
 #define TABLES_CMAP_H
 
 #include <SDL.h>
-#include "..\ttf.h"
+#include "ttf/ttf.h"
 
 typedef struct {
 	uint16_t version;

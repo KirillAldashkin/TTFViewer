@@ -2,7 +2,7 @@
 #define TABLES_HEAD_H
 
 #include <SDL.h>
-#include "..\ttf.h"
+#include "ttf/ttf.h"
 
 typedef struct {
 	Fixed version;

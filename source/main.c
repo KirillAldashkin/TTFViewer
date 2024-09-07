@@ -1,4 +1,5 @@
-﻿#include <SDL.h>
+﻿#include <string.h>
+#include <SDL.h>
 #include "ttf/ttf.h"
 #include "ttf/file.h"
 #include "ttf/render.h"
@@ -9,11 +10,18 @@
 #endif
 
 void show_error(const char* title) {
-	const char* error = SDL_GetError();
-	if (SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, title, error, NULL) == 0) {
+	const char* rawError = SDL_GetError();
+	int errorLen = strlen(rawError);
+	char* error = malloc(errorLen);
+	if(error == (char*)0) {
+		SDL_LogError(SDL_LOG_CATEGORY_CUSTOM, "Not enough memory even for error message");		
 		return;
 	}
-	SDL_LogError(SDL_LOG_CATEGORY_CUSTOM, "%s: %s", title, error);
+	strcpy(error, rawError);
+	if (SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, title, error, NULL) != 0) {
+		SDL_LogError(SDL_LOG_CATEGORY_CUSTOM, "%s: %s", title, error);
+	}
+	free(error);
 }
 
 #define BEZIER_STEPS 64
@@ -58,8 +66,10 @@ int create_window() {
 	}
 	if (SDL_GetDisplayDPI(SDL_GetWindowDisplayIndex(window), NULL, NULL, &dpi) != 0) {
 		show_error("Could not query a display's DPI parameter");
+		goto ErrorDPI;
 	}
 	return 0;
+ErrorDPI:
 ErrorRenderer:
 	SDL_DestroyWindow(window);
 ErrorWindow:
